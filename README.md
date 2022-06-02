@@ -1,2 +1,3 @@
-# express-test
-expressでのAPIサーバーの勉強のため
+# api-test
+nodeのAPIサーバーの勉強のため
+database接続までをできるだけクリーンアーキテクチャな構造で作りたい
