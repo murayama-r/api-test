@@ -3,6 +3,54 @@
 node の API サーバーの勉強のため
 database 接続までをできるだけクリーンアーキテクチャな構造で作りたい
 
+### 全体の構造
+
+- api
+  - Http
+    - Controller
+      - [DomainName]
+        - [UseCaseName]Controller
+          - index.ts - Controller
+  - Domain
+    - [DomainName]
+      - index.ts - Entity
+  - Infrastructure
+    - repositories
+      - [DomainName]
+        - I[DomainName]Respository.ts - [Data Access Interface]
+        - [DomainName]Respository.ts - [Data Access]
+      - IDBConnection.ts - DataAccess が DB に直接依存しないように DB との接続をラップする
+  - UseCase
+    - [DomainName]
+      - [UseCaseName]
+        - [UseCaseName]InputData.ts - [Input Data] Controller が受けた requestBody から UseCase が使用するオブジェクトに変換することで UseCase が Controller に依存しないようにする
+        - I[UseCaseName]UseCase.ts - [Input Boundary] UseCase が持つ関数などのインターフェースを定義するクラス
+        - [UseCaseName]Interactor.ts - [UseCase Interactor] 実際にオブジェクトを操作する UseCase の具象クラス
+- view
+  - components
+    - uiParts
+      - [ComponentName]
+        - index.tsx
+    - organizms
+      - [ComponentName]
+        - index.tsx
+        - hooks.ts
+    - templates
+      - [ComponentName]
+        - index.tsx
+        - hooks.ts
+  - hooks
+    - use[functionName].ts - 共通で使用するカスタムフック
+  - modules - apiclient など
+  - styles - globalcss
+- pages - router
+  - api - api router
+  - page - page router
+- public - フロントで使用する画像など（gcp とかに画像を置くなら fabicon とか以外はいらない）
+- types - 共通の型を定義する　例　 apiRequestBody, apiResponseBody
+
+view の Components の分け方をもう少し Domain に寄せてもいいのかも
+
 ### 初期構想
 
 - Next.js
