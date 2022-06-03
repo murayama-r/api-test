@@ -24,5 +24,8 @@ database 接続までをできるだけクリーンアーキテクチャな構�
       - ~.ts
 
 参考
+
 [クリーンアーキテクチャの UseCase Input について見直してみた](https://zenn.dev/tkhrtkmk/articles/eb00e7f76b725d)
+
 [Clean Architecture を Node.js+Typescript で実装してみる](https://blog.spacemarket.com/code/clean-architecture-node/)
+
