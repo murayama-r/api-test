@@ -12,13 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const controller = new FindTaskAllController(useCaseInteractor);
   const result = await controller.FindTaskAll({});
 
-  const response: TFindTaskAllResponseBody = {
-    taskList: result,
-  };
-
-  console.log("result");
-  console.log(response);
-  res.status(200).json(response);
+  res.status(200).json(result);
 };
 
 export default handler;

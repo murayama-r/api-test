@@ -5,6 +5,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TCreateTaskRequestBody } from "types";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  // queryからobjectに変換
+  // ここどうにかしたい
   const requestBody: TCreateTaskRequestBody = {
     taskNo: typeof req.query.taskNo === "string" ? req.query.taskNo : "",
     date:

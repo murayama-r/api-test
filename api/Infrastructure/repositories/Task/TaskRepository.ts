@@ -1,25 +1,28 @@
 import { Task } from "api/Domain/Task";
 import { ITaskRepository } from "./ITaskRepository";
+import escape from "sql-template-strings";
+import { query } from "../IDBConnection";
+import { TCreateTaskResponseBody, TFindTaskAllResponseBody } from "types";
 
 export class TaskRepository extends ITaskRepository {
-  create(task: Task): void {
-    console.log("----------------task----------------");
-    console.log(task);
-    throw new Error("Method not implemented.");
+  async create(task: Task): Promise<TCreateTaskResponseBody> {
+    try {
+      return await query<TCreateTaskResponseBody>(
+        `INSERT into task (taskNo, date, hour) VALUE ("${task.taskNo}", "${task.date}", ${task.hour});`
+      );
+    } catch (e) {
+      return { error: String(e) };
+    }
   }
-  findAll(): Promise<Task[]> {
-    const result: Task[] = [];
-    const a = async () => {
-      const test: Task[] = [
-        new Task("HTL-333", new Date("2022/05/11"), 8),
-        new Task("HTL-334", new Date("2022/05/12"), 3),
-        new Task("HTL-335", new Date("2022/05/13"), 6),
-      ];
-      return await test;
-    };
-    console.log("findall");
+  async findAll(): Promise<TFindTaskAllResponseBody> {
+    try {
+      const result = await query<Task[]>(
+        `SELECT taskNo, date, hour FROM task;`
+      );
 
-    // throw new Error("Method not implemented.");
-    return a();
+      return { taskList: result };
+    } catch (e) {
+      return { taskList: [], error: String(e) };
+    }
   }
 }

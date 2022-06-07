@@ -1,14 +1,15 @@
+import dayjs from "dayjs";
 // Entityの型定義
 export interface ITask {
   taskNo: string;
-  date: Date;
+  date: string;
   hour: number;
 }
 
 // Entity
 export class Task implements ITask {
   private _taskNo: string;
-  private _date: Date;
+  private _date: string;
   private _hour: number;
 
   get taskNo(): string {
@@ -18,10 +19,10 @@ export class Task implements ITask {
     this._taskNo = taskNo;
   }
 
-  get date(): Date {
+  get date(): string {
     return this._date;
   }
-  set date(date: Date) {
+  set date(date: string) {
     this._date = date;
   }
 
@@ -32,7 +33,11 @@ export class Task implements ITask {
     this._hour = hour;
   }
 
-  constructor(taskNo: string = "", date: Date = new Date(), hour: number = 0) {
+  constructor(
+    taskNo: string = "",
+    date: string = dayjs(new Date()).format("YYYY-MM-DD"),
+    hour: number = 0
+  ) {
     this._taskNo = taskNo;
     this._date = date;
     this._hour = hour;

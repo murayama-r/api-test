@@ -16,3 +16,11 @@ export type TFindTaskAllRequestBody = {};
 export type TFindTaskAllResponseBody = TApiResponseBody & {
   taskList: ITask[];
 };
+
+declare interface RowDataPacket {
+  constructor: {
+    name: "RowDataPacket";
+  };
+  [column: string]: any;
+  [column: number]: any;
+}
